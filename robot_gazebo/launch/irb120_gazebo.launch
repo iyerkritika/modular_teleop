@@ -1,0 +1,49 @@
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="rviz" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="velocity_control" default="false"/>
+
+  <!-- <arg name="sim" default="true" />
+  <arg name="robot_ip" unless="$(arg sim)" /> -->
+
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <arg name="world_name" value="$(find robot_gazebo)/world/test1.world"/> -->
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="verbose" value="true" />
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+   <include file="$(find robot_description)/launch/load_irb120.launch" />
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model irb120 -param robot_description"/>
+
+<rosparam>
+    source_list: [/irb120/joint_states]
+</rosparam>
+
+  <!-- ros_control irb120bot launch file -->
+
+  <include file="$(find robot_control)/launch/irb120_control.launch">
+    <arg name="vel_control" value="$(arg velocity_control)"/>
+    </include>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <!-- Starting rviz visualization-->
+  <group if="$(arg rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_gazebo)/config/robot_state_visualize.rviz" required="false" />
+  </group>
+  <rosparam command="load" file="$(find robot_interface)/config/joint_factor.yaml" ns="/factor" />
+</launch>

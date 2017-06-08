@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+<xacro:include filename="$(find robot_description)/urdf/irb120/irb120_macro.xacro"/>
+<xacro:macro name="abb_irb120_g" params="prefix">
+
+  <!-- get base ABB IRB120 model -->
+  <xacro:abb_irb120 prefix="${prefix}" />
+
+  <!-- transmission list -->
+  <transmission name="${prefix}tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}joint_1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="${prefix}tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}joint_2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="${prefix}tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}joint_3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="${prefix}tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}joint_4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}motor4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="${prefix}tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}joint_5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}motor5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="${prefix}tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}joint_6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}motor6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <!-- end of transmission list -->
+
+  <!-- Gazebo-specific link properties -->
+  <gazebo reference="${prefix}base_link">
+    <material>Gazebo/Orange</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+  <gazebo reference="${prefix}link_1">
+    <material>Gazebo/Orange</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+  <gazebo reference="${prefix}link_2">
+    <material>Gazebo/Orange</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+  <gazebo reference="${prefix}link_3">
+    <material>Gazebo/Orange</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+  <gazebo reference="${prefix}link_4">
+    <material>Gazebo/Orange</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+  <gazebo reference="${prefix}link_5">
+    <material>Gazebo/Orange</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+  <gazebo reference="${prefix}link_6">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/irb120</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+<!-- 
+  <gazebo reference="sense_joint">
+    <sensor name="sense_joint_contact" type="force_torque">
+      <always_on>1</always_on>
+      <update_rate>10</update_rate>
+      <topic>/gazebo/sensor</topic>
+      <frame>sense_link</frame>
+      <plugin name="sense_joint_ft_sensor" filename="libgazebo_ros_ft_sensor.so"/>
+    </sensor>
+  </gazebo> -->
+
+
+
+  <!-- <gazebo reference="${prefix}sense_link">
+    <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+        <robotNamespace>/irb120</robotNamespace>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>50</updateRate>
+        <bumperTopicName>/a_bumper</bumperTopicName>
+        <frameName>${prefix}sense_link</frameName>
+      </plugin>
+  </gazebo>
+  <gazebo reference="sense_joint">
+    <provideFeedback>true</provideFeedback>
+</gazebo>
+<gazebo>
+    <plugin name="sense_joint_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <always_on>1</always_on>
+        <updateRate>10.0</updateRate>
+        <topicName>/ft_sensor_topic</topicName>
+        <jointName>sense_joint</jointName>
+    </plugin>
+</gazebo>
+
+
+  <gazebo  reference="sense_link">
+  <sensor name="sense_link_contact_sensor" type="contact">
+    <always_on>1</always_on>
+    <update_rate>30</update_rate>
+    <geom>sense_link_geom</geom>
+    <contact>
+      <collision>sense_link_collision</collision>
+    </contact>
+    <plugin name="sense_link_bumper" filename="libgazebo_ros_bumper.so">
+      <bumperTopicName>/force_sensor</bumperTopicName>
+      <frameName>world</frameName>
+    </plugin>
+  </sensor>
+ </gazebo> -->
+
+  </xacro:macro>
+</robot>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>robot_control</name>
+  <version>0.0.0</version>
+  <description>The irb120_control package</description>
+
+  <maintainer email="skasturirangan@wpi.edu">Sathya Narayanan K</maintainer>
+
+  <license>BSD</license>
+  <author email="skasturirangan@wpi.edu">Sathya Narayanan K</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>controller_manager</run_depend>
+  <run_depend>joint_state_controller</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+
+  <run_depend>rqt_gui</run_depend>
+  <run_depend>effort_controllers</run_depend>
+
+
+  <export>
+  </export>
+
+</package>

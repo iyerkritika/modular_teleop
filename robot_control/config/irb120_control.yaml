@@ -1,0 +1,75 @@
+irb120:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 1000
+
+  # Velocity Controllers ---------------------------------------
+  joint_1_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: joint_1
+    pid: {p: 100.0, i: 0.10, d: 01.0, i_clamp: 0.0}
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+  joint_2_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: joint_2
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+    pid: {p: 100.0, i: 0.10, d: 01.0, i_clamp: 0.0}
+    # pid: {p: 10.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+  joint_3_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: joint_3
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+    pid: {p: 100.0, i: 0.10, d: 01.0, i_clamp: 0.0}
+    # pid: {p: 10.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+  joint_4_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: joint_4
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+    pid: {p: 100.0, i: 0.10, d: 01.0, i_clamp: 0.0}
+    # pid: {p: 10.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+    # pid: {p: 500, i: 0.1, d: 1,i_clamp: 0.0}
+  joint_5_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: joint_5
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+    pid: {p: 100.0, i: 0.10, d: 01.0, i_clamp: 0.0}
+    # pid: {p: 10.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+    # pid: {p: 300, i: 0.1, d: 2,i_clamp: 0.0}
+  joint_6_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: joint_6
+    # pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+    pid: {p: 100.0, i: 0.10, d: 01.0, i_clamp: 0.0}
+    # pid: {p: 10.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+    # pid: {p: 700, i: 0.1, d: 1,i_clamp: 0.0}
+
+  # Position Controllers ---------------------------------------
+  joint_1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_1
+    pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+  joint_2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_2
+    pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+  joint_3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_3
+    pid: {p: 100, i: 0.01, d: 10,i_clamp: 0.0}
+  joint_4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_4
+    pid: {p: 500, i: 0.1, d: 1,i_clamp: 0.0}
+    # pid: {p: 100, i: 0.1, d: 1,i_clamp: 0.0}
+  joint_5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_5
+    pid: {p: 300, i: 0.1, d: 2,i_clamp: 0.0}
+  joint_6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_6
+    pid: {p: 700, i: 0.1, d: 1,i_clamp: 0.0}
+    # pid: {p: 100, i: 0.1, d: 1,i_clamp: 0.0}
